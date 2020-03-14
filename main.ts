@@ -1,4 +1,22 @@
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
+    mySprite.setImage(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
     if (answerOn == 1) {
         choice = 0
         mySprite.setImage(arrows[choice])
@@ -8,7 +26,6 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
 })
 function checkChoice () {
     if (choice == arrowList.shift()) {
-        points += 1
         console.log(arrowList)
         if (arrowList.length == 0) {
             Level_Over()
@@ -23,6 +40,24 @@ function checkChoice () {
     }
 }
 controller.left.onEvent(ControllerButtonEvent.Released, function () {
+    mySprite.setImage(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
     if (answerOn == 1) {
         choice = 3
         mySprite.setImage(arrows[choice])
@@ -31,6 +66,24 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
+    mySprite.setImage(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
     if (answerOn == 1) {
         choice = 1
         music.ringTone(notesList[Math.randomRange(0, 6)])
@@ -39,8 +92,8 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
     }
 })
 function Level_Over () {
+    music.setVolume(0)
     answerOn = 0
-    music.stopAllSounds()
     mySprite.setImage(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -61,11 +114,31 @@ function Level_Over () {
 `)
     Timer = (game.runtime() - Start_time) / 1000
     list.push(points)
+    game.splash("" + points + " " + "Correct Answers")
+    game.splash("" + Timer + " " + "Seconds")
     game.splash("" + Math.round(points / Timer * 100) + " " + "points")
     pause(2000)
     game.reset()
 }
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
+    mySprite.setImage(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
     if (answerOn == 1) {
         choice = 2
         music.ringTone(notesList[Math.randomRange(0, 6)])
@@ -101,9 +174,7 @@ function MusicLevel () {
         music.ringTone(notesList[Math.randomRange(0, 6)])
         pause(100)
     }
-    music.stopAllSounds()
     console.log(arrowList)
-    points = 0
     game.showLongText("Use the keypad to recreate the pattern", DialogLayout.Center)
     answerOn = 1
     Start_time = game.runtime()
@@ -211,9 +282,10 @@ arrows = [img`
 `]
 list = []
 arrowList = []
-points = 0
+points = 7
 Timer = 0
 let whichLevel = 0
 answerOn = 0
-notesList = [262, 294, 330, 392, 440, 523, 220]
+notesList = [262, 659, 147, 392, 440, 523, 196]
+music.setVolume(255)
 MusicLevel()
